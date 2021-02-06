@@ -1,0 +1,10 @@
+<li>
+<form method="post" action="{% url 'interested_event' %}">{% csrf_token %}
+{% if is_interested  %}
+<button type="submit" id="interested" name="event_id" value="{{ event.id }}" class="btn btn-danger btn-sm"><i class="fa fa-heart-broken" aria-hidden="true"></i></button>
+{% else %}
+ <button type="submit" id="interested"  name="event_id" value="{{ event.id }}" class="btn btn-success btn-sm"><i class="fa fa-heart" aria-hidden="true"></i></button>
+{% endif %}
+</form>
+</li>
+<span><p style="font-size: 21.5px;color: blue;font-family: serif;"> {{ total_interested }} are Inerested</p></span>

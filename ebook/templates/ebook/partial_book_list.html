@@ -1,0 +1,25 @@
+     {% for m in book %}
+                                            <tr>
+                                                <td class="text-center text-muted">{{ m.book_name }}</td>
+                                                <td class="text-center text-muted">{{ m.book_author }}</td>
+                                                <td class="text-center text-muted">{{ m.category }}</td>
+                                                <td class="text-center text-muted">{{ m.book_type }}</td>
+
+                                                <td class="text-center">
+                                                              <a class="btn btn-warning btn-sm" href="{% url 'editbook' m.id %}">
+                                                                <span class="fa fa-edit"></span>
+                                                              </a>
+                                                              <a
+                                                                      class="btn btn-danger btn-sm"
+                                                                      onclick="return confirm('Are you sure you want to delete this?')"
+                                                                      href="{% url 'deletebook' m.id %}">
+
+                                                                <span class="fas fa-trash"></span>
+                                                              </a>
+                                                </td>
+                                            </tr>
+                                            {% empty %}
+                                            <tr>
+                                              <td colspan="10" class="text-center bg-warning">No Books</td>
+                                            </tr>
+                                          {% endfor %}

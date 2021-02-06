@@ -1,0 +1,60 @@
+
+<style>
+.pagination {
+    text-align: center;
+    margin-top: 1em;
+}
+
+.pagination a {
+    text-decoration: none;
+}
+
+.pagination-current,
+.pagination-total {
+    padding: 0.5em 0.8em;
+    border-radius: 2px;
+    color: #fff;
+    background-color: #30BF61;
+}
+
+.pagination-total {
+    background-color: #B9B9B9;
+}
+
+.pagination-action {
+    margin: 0 0.1em;
+    display: inline-block;
+    padding: 0.5em 0.5em;
+    color: #B9B9B9;
+    font-size: 1.3em;
+}
+
+.pagination-of {
+    color: #B9B9B9;
+    padding: 0 1em;
+}
+
+.pagination-action:hover {
+    color: #3354AA;
+}
+</style>
+<div class="pagination">
+    {% if events.has_previous %}
+        <a class="pagination-action" href="?page=1">
+            <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+        </a>
+        <a class="pagination-action" href="?page={{ events.previous_page_number }}">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+        </a>
+    {% endif %}
+    <span class="pagination-current">{{ events.number }}</span>
+    <span class="pagination-of">of</span>
+    <span class="pagination-total">{{ events.paginator.num_pages }}</span>
+    {% if events.has_next %}
+        <a class="pagination-action" href="?page={{ events.next_page_number }}">
+            <i class="fa fa-angle-right" aria-hidden="true"></i> </a>
+        <a class="pagination-action" href="?page={{ events.paginator.num_pages }}">
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+        </a>
+    {% endif %}
+</div>

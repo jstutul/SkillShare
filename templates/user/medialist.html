@@ -1,0 +1,98 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}
+Media List
+{% endblock %}
+{% block css %}
+.
+{% endblock %}
+{% block content %}
+         {% if messages %}
+           {% for message in messages %}
+         <div class="alert alert-success alert-dismissable">
+         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+         {{ message }} <a href="#" class="alert-link"></a>.
+         </div>
+        {% endfor %}
+
+        {% endif %}
+ <div class="row ml-2 p-2">
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-header">MEDIA LISTS
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="1" class="text-center">Post Id</th>
+                                                <th colspan="">Title</th>
+                                                <th colspan="" class="text-center">Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                             {% for m in media %}
+                                            <tr>
+                                                <td class="text-center text-muted">{{ m.id }}</td>
+                                                <td>
+                                                    <div class="widget-content p-0">
+                                                        <div class="widget-content-wrapper">
+                                                            <div class="widget-content-left mr-3">
+                                                                <div class="widget-content-left">
+                                                                    <img width="60" src="{{ m.thumbnail.url}}" alt="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="widget-content-left flex2">
+                                                                <div class="widget-heading">{{ m.title }}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                   <a class="btn btn-success btn-sm" href="{% url 'viewmediapost' m.id %}">
+
+                                                        <span class="fa fa-eye"></span>
+                                                      </a>
+                                                      <a class="btn btn-warning btn-sm" href="{% url 'mediaupdate' m.id %}">
+                                                        <span class="fa fa-edit"></span>
+                                                      </a>
+                                                      <a class="btn btn-danger btn-sm" href="{% url 'media_delete' m.id %}" id="delete"
+                                                         onclick="return confirm('Are you sure you want to delete this?')" >
+                                                        <span class="fas fa-trash"></span>
+                                                      </a>
+                                                </td>
+                                            </tr>
+                                            {% empty %}
+                                            <tr>
+                                              <td colspan="10" class="text-center bg-warning">No Media</td>
+                                            </tr>
+                                          {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination" style="padding-left: 31px;">
+      {% if media.has_previous  %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ media.previous_page_number }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+      {% endif %}
+    <li class="page-item"><a class="page-link" href="?page={{ media.number }}">1</a></li>
+  {% if media.has_next  %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ media.next_page_number }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  {% endif %}
+  </ul>
+</nav>
+
+<!-- Button trigger modal -->
+
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+book read page
+{% endblock %}
+
+{% block css %}
+.pdfviewer {
+ display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width:100%;
+  margin-bottom:20px;
+}
+{% endblock %}
+
+{% block content %}
+    <script src="{% static  'pdfobject.min.js'%}"></script>
+    <h4 class="text-warning text-center border-bottom mb-2">If pdf not opening then disable IDM or use Desktop mode</h4>
+{#<object class="col-md-10 pdfviewer" width="100%" height="600px" type="application/pdf"#}
+{#data="{{ book.book.url }}#toolbar=0" id="pdf_content">#}
+{#    <p>Document load was not#}
+{#successful. use desktop mode to view it</p></object>#}
+    <style>
+.pdfobject-container { height: 30rem; border: 1rem solid rgba(0,0,0,.1); }
+</style>
+    <div id="example1" style="height: 600px;"></div>
+<script>PDFObject.embed("{{ book.book.url }}#toolbar=0", "#example1");</script>
+
+{% endblock %}

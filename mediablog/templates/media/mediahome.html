@@ -1,0 +1,16 @@
+{% extends  'base.html'%}
+
+{% block title %}
+    Media blog
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+hi
+    {% for p in posts %}
+        {{ p.media_description | safe }}
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css %}
+.postmedia{
+    margin:0 auto;
+    margin-top: 1%;
+
+    }
+    .invalid-feedback{
+    color:red;
+    }
+{% endblock %}
+
+{% block title %}
+Journal update
+{% endblock %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data" class="col-md-8 col-sm-12 postmedia bg-light px-sm-5 py-3 border mb-md-4" >{% csrf_token %}
+        <h3 class="text-primary border-bottom p-2 text-center">Update Journal </h3>
+        {{ form.media }}
+        {{ form| crispy }}
+        <div class="form-group">
+         <button type="submit" class="btn btn-primary col-md-12"><i class="fa fa-level-up">Update Journal</i></button>
+
+        </div>
+    </form>
+{% endblock %}

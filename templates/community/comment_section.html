@@ -1,0 +1,92 @@
+<style type="text/css">
+  .sided-70 .s-left.rounded img {
+    border-radius: 70px;
+    overflow: hidden;
+    max-width: 50px;
+    max-height: 50px;
+}
+</style>
+<h4 class="p-title mt-20"><b>{{post.count_comment}} COMMENTS</b></h4>
+{% load  static %}
+<style>
+    .sub-img{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+</style>
+{% for cm in comments %}
+{% if cm.post == post %}
+
+    <div class="sided-70 mb-40">
+      <div class="s-left rounded">
+          {% if cm.user.organizationuser.user_o == cm.user %}
+           <img src="{{ cm.user.organizationuser.photo.url }}" alt="">
+          {% else %}
+        <img src="{{ cm.user.regularuser.photo.url }}" alt="">
+           {% endif %}
+
+      </div>
+      <div class="s-right ml-100 ml-xs-85">
+        <h3 class="mtb-2">{{cm.content}}</h3>
+          {% if cm.user.organizationuser.user_o == cm.user %}
+        <h5 class="text-primary"><b>{{cm.user.organizationuser.title }} </b> <span class="font-8 color-ash">{{cm.time}}</span></h5>
+          {% else %}
+              <h5 class="text-primary"><b>{{cm.user }} </b> <span class="font-8 color-ash">{{cm.time}}</span></h5>
+           {% endif %}
+        <p id="{{cm.id}}">
+      <button onclick="ReplyForm('{{cm.id}}')" class="btn-brdr-grey btn-b-sm plr-15 mt-5"> REPLY </button>
+        </p>
+      </div><!-- s-right -->
+    </div><!-- sided-70 -->
+
+
+    {% for subc in subcomment %}
+    {% if subc.comment == cm %}
+    <div class="sided-40 ml-100 ml-xs-20 mb-4">
+      <div class="s-left rounded">
+           {% if subc.user.organizationuser.user_o == subc.user %}
+        <img src="{{ subc.user.organizationuser.photo.url }}" alt="" class="sub-img">
+           {% else %}
+               <img src="{{ subc.user.regularuser.photo.url }}" alt="" class="sub-img">
+           {% endif %}
+      </div>
+      <div class="s-right ml-100 ml-xs-85">
+        <p class="mtb-2">{{ subc.content}}</p>
+          {% if subc.user.organizationuser.user_o == subc.user %}
+        <h5 class="text-warning"><b>{{ subc.user.organizationuser.title }}</b> <span class="font-8 color-ash">{{subc.time | timesince }}</span></h5>
+          {% else %}
+          <h5 class="text-warning"><b>{{ subc.user }}</b> <span class="font-8 color-ash">{{subc.time | timesince }}</span></h5>
+          {% endif %}
+      </div><!-- s-right -->
+
+    </div><!-- sided-70 -->
+        {% endif %}
+    {% endfor %}
+
+    {% endif %}
+{% endfor %}
+
+<h4 class="p-title mt-20"><b>LEAVE A COMMENT</b></h4>
+
+<form class="form-block form-plr-15 form-h-45 form-mb-20 form-brdr-lite-white mb-md-50" method="POST" >{% csrf_token %}
+  <input type="hidden" name="post_id" value="{{post.id}}">
+  <textarea class="ptb-10" name="comm" placeholder="Your Comment"></textarea>
+  <button class="btn-fill-primary plr-30" rows="4" cols="50" type="submit"><b>LEAVE A COMMENT</b></button>
+</form>
+
+
+<script type="text/javascript">
+
+function ReplyForm(id){
+  let form=`
+  <form class="form-block form-plr-15 form-h-45 form-mb-20 form-brdr-lite-white mb-md-50" method="POST">{% csrf_token %}
+    <input type="hidden" name="comm_id" value='${id}'>
+    <input type="hidden" name="post_id" value="{{post.id}}">
+    <textarea class="ptb-10" name="comm" placeholder="Your reply"></textarea>
+    <button class="btn-fill-primary plr-30" rows="4" cols="50" type="submit"><b>LEAVE A REPLY</b></button>
+  </form>
+  `
+  document.getElementById(id).innerHTML = form;
+}
+</script>

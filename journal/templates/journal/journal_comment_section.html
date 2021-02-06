@@ -1,0 +1,63 @@
+<style>
+    .comment-img{
+        max-width: 25px;
+        max-height: 25px;
+        border-radius: 35%;
+    }
+</style>
+                    <form class="journal-comment-form form-block form-plr-15 form-h-45 form-mb-20 form-brdr-lite-white mb-md-50" action="" method="post">{% csrf_token %}
+						{{ comment_form  }}
+						<button class="btn-fill-primary plr-30"  type="submit"><b>LEAVE A COMMENT</b></button>
+					</form>
+					<h4 class="p-title mt-20"><b>{{ comments.count }} COMMENTS</b></h4>
+                    <div style="max-height: 1200px;overflow: auto;">
+                    {% for comment in comments %}
+
+                        <blockquote class="blockquote">
+
+                        <p class="mb-0" style="font-size: 20px;">{{ comment.content }}</p>
+                        <footer class="blockquote-footer">by
+                            {% if comment.user.organizationuser.user_o == comment.user%}
+                             <img src="{{ comment.user.organizationuser.photo.url }}" width="25px" height="25px" class="comment-img">
+                            <cite title="Source Title" style="color: red">{{ comment.user.organizationuser.title |capfirst }}
+                            {% else %}
+                            <img src="{{ comment.user.regularuser.photo.url }}" width="25px" height="25px" class="comment-img">
+                            <cite title="Source Title" style="color: red">{{ comment.user |capfirst }}
+                            {% endif %}
+                            </cite><code class="margin-left:1px;">{{ comment.timestamp }}</code>
+                        <button type="submit" class="journal-reply-btn btn btn-outline-dark btn-sm">Reply</button>
+                        </footer>
+                        </blockquote>
+
+                        <div class="journal-replied-comments container mt-2 ml-40" style="display: none">
+                        {% for reply in comment.replies.all %}
+                            <blockquote class="blockquote">
+                            <p class="mb-0" style="color: #0000cc;font-size: 15px;">{{ reply.content }}</p>
+                            <footer class="blockquote-footer">by
+                                {% if reply.user.organizationuser.user_o == reply.user%}
+                                <img src="{{ reply.user.organizationuser.photo.url }}" width="25px" height="25px" class="comment-img">
+                                <cite title="Source Title" style="color: #29b323">{{ reply.user.organizationuser.title |capfirst }}</cite>
+                                {% else %}
+                                 <img src="{{ reply.user.regularuser.photo.url }}" width="25px" height="25px" class="comment-img">
+                                 <cite title="Source Title" style="color: #29b323">{{ reply.user|capfirst }}</cite>
+                                {% endif %}
+
+                            <code>{{ reply.timestamp }}</code>
+                            </footer>
+                            </blockquote>
+                        {% endfor %}
+
+                            <div class="form-group row ml-60 ">
+                                <form class="journal-reply-form form-block form-plr-15 form-h-45 form-mb-20 form-brdr-lite-white mb-md-50"action="" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="comment_id" value="{{ comment.id }}">
+						{{ comment_form  }}
+						<button class="btn-fill-primary plr-30"  type="submit"><b>LEAVE A REPLY</b></button>
+					</form>
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+                    </div>

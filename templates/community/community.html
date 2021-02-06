@@ -1,0 +1,42 @@
+{%extends 'base.html'%}
+{% load static %}
+{% block title %}
+Community  Home
+{% endblock %}
+{% block content %}
+
+	<section class="ptb-0 mb-4">
+		<div class="mb-30 brdr-ash-1 opacty-5"></div>
+		<div class="container">
+			<a class="mt-10" href="{% url 'Mainhome'%}"><i class="mr-5 ion-ios-home"></i>Home<i class="mlr-10 ion-chevron-right"></i></a>
+			<a class="mt-10 color-ash" href="{% url 'communityhome' %}">Community</a>
+				<a type="button" href="{% url 'addcommunity' %}"class="btn btn-success btn-sm float-right"><i class="fa fa-plus fa-fw"></i>Add</a>
+		</div><!-- container -->
+	</section>
+<section class="pt-0">
+	<div class="container">
+	{% for post in blog %}
+		<div class="accordian" onload="Refresh()">
+			<h5><a data-accordian="#accordian-{{post.id}}" class="a-title" href="#">
+				<b>{{post.title}}</b>
+                {% if post.author.organizationuser.user_o == post.author %}
+                <span class="text-primary ml-4"> by {{post.author.organizationuser.title}}</span>
+                {% else %}
+                <span class="text-primary ml-4"> by {{post.author}}</span>
+                {% endif %}
+                <i class="ion-plus"></i></a></h5>
+
+					<div class="a-body" id="accordian-{{post.id}}"  style="height:600px; overflow:auto;">
+									<div class="a-body-inner">
+										<p>{{post.details}}</p>
+									<div class="community-comment-section">
+									{% include 'community/comment_section.html' %}
+									</div>
+									</div><!-- a-body-inner -->
+						</div><!-- a-body -->
+		</div><!-- accordian -->
+		{% endfor %}
+	</div><!-- container -->
+</section>
+
+{% endblock %}

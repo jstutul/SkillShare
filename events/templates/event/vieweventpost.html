@@ -1,0 +1,61 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}
+Event List
+{% endblock %}
+{% block css %}
+
+{% endblock %}
+{% block content %}
+         {% if messages %}
+           {% for message in messages %}
+         <div class="alert alert-success alert-dismissable">
+         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+         {{ message }} <a href="#" class="alert-link"></a>.
+         </div>
+        {% endfor %}
+
+        {% endif %}
+<div class="row ml-2 p-2">
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-header">EVENT LISTS
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="" class="text-center">Event Id</th>
+                                                <th colspan="">Event TItle</th>
+                                                <th colspan="" class="text-center">Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                             {% include 'event/partial_event.html' %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination" style="padding-left: 31px;">
+      {% if events.has_previous  %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ events.previous_page_number }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+      {% endif %}
+    <li class="page-item"><a class="page-link" href="?page={{ events.number }}">1</a></li>
+  {% if events.has_next  %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ events.next_page_number }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  {% endif %}
+  </ul>
+</nav>
+</div>
+
+{% endblock %}

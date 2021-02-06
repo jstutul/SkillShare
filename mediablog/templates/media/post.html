@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}}
+
+{% block content %}
+
+    <form method="post" class="col-md-8 col-sm-12 border mb-4" style="margin: auto; background: #1d75b308">{% csrf_token %}
+        <h3 class="text-primary border-bottom p-2 ">Post Your Media Here</h3>
+        <div class="form-group mt-2">
+             {{ form }}
+             {{ form.media }}
+            <button class="btn btn-primary my-2" value="">Post Media</button>
+        </div>
+    </form>
+{% endblock %}

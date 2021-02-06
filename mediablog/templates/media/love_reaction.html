@@ -1,0 +1,8 @@
+{% load static %}
+
+                            <form  method="post" action="{% url 'love_post'  %}">{% csrf_token %}
+                                <div class="reacts animate__fadeInUp">
+                                    <button type="submit" name="post_id"  id="like" value="{{ post.id }}" class="animated zoomIn"> <img src="{% static 'react/love.gif' %}"></button>
+                            </div>
+
+                            </form>

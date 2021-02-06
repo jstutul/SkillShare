@@ -1,0 +1,138 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}
+Journal List
+{% endblock %}
+{% block css %}
+{% endblock %}
+{% block content %}
+         {% if messages %}
+           {% for message in messages %}
+         <div class="alert alert-success alert-dismissable">
+         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+         {{ message }} <a href="#" class="alert-link"></a>.
+         </div>
+        {% endfor %}
+
+        {% endif %}
+  <div class="app-main__inner">
+                            <div class="row">
+                            <div class="col-md-6 col-xl-4">
+                                <div class="card mb-3 widget-content bg-midnight-bloom">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Total Journal</div>
+                                            <div class="widget-subheading">All paid and free </div>
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-white"><span>{{total_journal.count}}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xl-4">
+                                <div class="card mb-3 widget-content bg-arielle-smile">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Total Download</div>
+                                            <div class="widget-subheading">All free and paid</div>
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-white"><span>{{total_download}}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xl-4">
+                                <div class="card mb-3 widget-content bg-grow-early">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Total Access</div>
+                                            <div class="widget-subheading">People who paid</div>
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-white"><span>{{total_access}}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-xl-4">
+                                <div class="card mb-3 widget-content">
+                                    <div class="widget-content-outer">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left">
+                                                <div class="widget-heading">Journal Rated</div>
+                                                <div class="widget-subheading">Last year expenses</div>
+                                            </div>
+                                            <div class="widget-content-right">
+                                                <div class="widget-numbers text-success">{{total_rated}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xl-4">
+                                <div class="card mb-3 widget-content">
+                                    <div class="widget-content-outer">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left">
+                                                <div class="widget-heading">Total Income</div>
+                                                <div class="widget-subheading">Revenue streams</div>
+                                            </div>
+                                            <div class="widget-content-right">
+                                                <div class="widget-numbers text-warning">{{total_income}}$</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+  <div class="row ml-2 p-2">
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-header">Journal LISTS
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="1" class="text-center">Post Id</th>
+                                                <th colspan="">Journal Name</th>
+                                                <th colspan="" class="text-center">Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                             {% include 'journal/partial_journal.html' %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination" style="padding-left: 31px;">
+      {% if all_journal.has_previous  %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ all_journal.previous_page_number }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+      {% endif %}
+    <li class="page-item"><a class="page-link" href="?page={{ all_journal.number }}">1</a></li>
+  {% if all_journal.has_next  %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ all_journal.next_page_number }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  {% endif %}
+  </ul>
+</nav>
+
+</div>
+
+{% endblock %}

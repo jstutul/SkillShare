@@ -1,0 +1,50 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block css %}
+
+{% endblock %}
+
+{% block title %}
+{{ journal.journal_title }}
+{% endblock %}
+
+{% block content %}
+
+
+				<div class="col-md-12 col-lg-12" style="margin: 0 auto;">
+					<img src="{{ journal.jornal_cover.url }}" class="journalinfoimg" width="60%" height="400px" style="margin-left:23%;" alt="">
+					<h3 class="mt-30 text-info text-center"><b>{{ journal.journal_title }}</b></h3>
+					<div class="list-li-mr-3 list-li-sm-mr-0 mtb-15 pr-4 p-1 text-center">
+						by <a href="#"><b>{{ journal.post_by }} </b></a>
+                        <a><i class="fa fa-eye"></i></a> {{ journal.journal_view.count }}
+                         <code>{{ journal.post_date | timesince }} ago</code>
+					</div>
+					<div class="quote-primary mtb-20">
+						<h5 >{{ journal.journal_details | safe }}</h5>
+					</div><!-- quote-primary -->
+                    <div class="quote-primary mtb-20">
+                        <p><b>Journal Author :</b> {{ journal.jornal_author }} </p>
+                        <p><b>Journal Type :</b> {{ journal.journal_type }}</p>
+                        <p><b>Journal Category :</b> {{ journal.journal_category }}</p>
+                        <p><b>Document Type :</b> {{ journal.document_type }}</p>
+                        <p><b>Publication Year :</b> {{ journal.publication_year }}</p>
+                        {% if  journal.journal_type == "Paid" %}
+                        <p><b>Journal Price :</b> {{ journal.price }}</p>
+                        {% endif %}
+                        <p><b>Total Download :</b> {{ journal.download_count }} times</p>
+                        {% if  journal.journal_type == "Paid" %}
+                        <p><b>Total  Access :</b> {{ journal.access.count }}</p>
+                        {% endif %}
+
+					</div><!-- quote-primary -->
+					<div class="float-left-right text-center mt-40 mt-sm-20">
+					</div><!-- float-left-right -->
+
+                    <div class="brdr-ash-1 opacty-5"></div></hr>
+
+
+
+				</div><!-- col-md-9 -->
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block css %}
+
+#comm{
+    border:2px solid slategrey;
+    padding:7pxl
+    margin:10px;
+    font-size:15px;
+    }
+@media only screen and (mix-width: 360px) {
+    img {
+    margin-top:15px;
+        max-height: 250px;
+    }
+    }
+
+{% endblock %}
+
+{% block title %}
+view event post
+{% endblock %}
+
+{% block content %}
+
+
+				<div class="col-md-12 col-lg-12 views" style="margin-top: 1%;">
+					<img src="{{ event.banner.url }}" alt="" style="height: 600px;width:100%;">
+					<h3 class="mt-30 text-info text-center p-4"><b>{{ event.event_title }}</b></h3>
+					<div class="list-li-mr-3 list-li-sm-mr-0 mtb-15 pr-4 text-center">
+						by <a href="#"><b>{{ event.event_organizar }} </b></a>
+                        <a><i class="fa fa-eye"></i></a> {{ event.view_count }}
+                         <code>{{ event.post_on | timesince }} ago</code>
+					</div>
+					<div class="quote-primary mtb-20  p-2">
+						<h5 >{{ event.description | safe }}</h5>
+					</div><!-- quote-primary -->
+                    <div class="quote-primary mtb-20 p-2">
+                        <p><b>Event Date :</b> {{ event.start_date }} to {{ event.end_date }}</p>
+                        <p><b>Event Time :</b> {{ event.start_time }} to {{ event.end_time }}</p>
+                        <p><b>Event Location :</b> {{ event.location }}</p>
+                        <p><b>Event Type :</b> {{ event.category }}</p>
+                        <p><b>Seat Limit :</b> {{ event.seat_limit }}</p>
+                        <p><b>Entry fees :</b> {{ event.entry_fee }} Tk (BD)</p>
+                        <p><b>Registration link :</b> <a href="{{ event.registration_link }}">Click here</a></p>
+					</div><!-- quote-primary -->
+					<div class="float-left-right text-center mt-40 mt-sm-20">
+					</div><!-- float-left-right -->
+
+                    <div class="brdr-ash-1 opacty-5"></div></hr>
+
+
+
+				</div><!-- col-md-9 -->
+{% endblock %}

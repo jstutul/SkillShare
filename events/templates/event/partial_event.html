@@ -1,0 +1,40 @@
+   {% for m in events %}
+                                            <tr>
+                                                <td class="text-center text-muted">{{ m.id }}</td>
+                                                <td>
+                                                    <div class="widget-content p-0">
+                                                        <div class="widget-content-wrapper">
+                                                            <div class="widget-content-left mr-3">
+                                                                <div class="widget-content-left">
+                                                                    <img width="40" src="{{ m.banner.url}}" alt="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="widget-content-left flex2">
+                                                                <div class="widget-heading">{{ m.event_title }}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+
+                                                    <a class="btn btn-success btn-sm" href="{% url 'vieweventpost' m.id %}">
+
+                                                <span class="fa fa-eye"></span>
+                                              </a>
+                                              <a class="btn btn-warning btn-sm" href="{% url 'eventupdate' m.id %}">
+                                                <span class="fa fa-edit"></span>
+                                              </a>
+                                              <a
+                                                      class="btn btn-danger btn-sm"
+                                                      onclick="return confirm('Are you sure you want to delete this?')"
+                                                      href="{% url 'eventdelete' m.id %}">
+
+                                                <span class="fas fa-trash"></span>
+                                              </a>
+                                                </td>
+                                            </tr>
+                                            {% empty %}
+                                            <tr>
+                                              <td colspan="10" class="text-center bg-warning">No Event</td>
+                                            </tr>
+                                          {% endfor %}

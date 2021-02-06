@@ -1,0 +1,23 @@
+<li>
+{% if journal.journal_type == "Free" %}
+{#   <form method="get" action="{{ journal.journal_file.url }}">#}
+{#<button type="submit" class="btn btn-primary btn-sm" name="journal_id" value="{{ journal.id }}" id="download" download>download</button>#}
+{#</form>#}
+    <a href="{% url 'downpdf' journal.id %}" class="btn btn-primary btn-sm" id="pdfdownload" ><i class="fa fa-download"></i></a>
+{% else %}
+    {% if is_access or request.user == journal.post_by or request.user.is_superuser %}
+        <input type="hidden" id="jj" value="{{ journal.id }}">
+      <a href="{% url 'downpdf' journal.id %}" class="btn btn-primary btn-sm" id="pdfdownload" ><i class="fa fa-download"></i></a>
+        {% else %}
+         <p><a class="btn btn-primary btn-sm" href="{% url 'checkout' journal.id %}" >Buy now</a></p>
+        {% endif %}
+
+{% endif %}
+</li>
+Download : <span id="dd">{{ journal.download_count }}</span>
+
+{% block js %}
+
+
+
+{% endblock %}

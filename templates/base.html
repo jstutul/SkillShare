@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+
+<html lang="en">
+{% load static %}
+  <head>
+    <title>{% block title %} {% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <style>
+      {% block css %}
+
+      {% endblock %}
+    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link
+      href="{% static 'plugin-frameworks/bootstrap.css' %}"
+      rel="stylesheet"
+    />
+
+    <link href="{% static 'fonts/ionicons.css' %}" rel="stylesheet" />
+
+    <link href="{% static 'common/styles.css' %}" rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'register/css/sourcesanspro-font.css' %}"
+    />
+
+    <link rel="stylesheet" href="{% static 'register/css/style.css' %}" />
+  </head>
+  <body>
+    <header>
+      <div class="bg-191">
+        <div class="container">
+          <div class="oflow-hidden color-ash font-9 text-sm-center ptb-sm-5">
+            <ul
+              class="float-left float-sm-none list-a-plr-10 list-a-plr-sm-5 list-a-ptb-15 list-a-ptb-sm-10"
+            >
+              {% if user.is_authenticated %}
+                  {% if request.user.organizationuser.user_o == request.user %}
+                      <li><a class="pl-0 pl-sm-10">Welcome {{ request.user.organizationuser.title }}</a></li>
+                  {% else %}
+                      <li><a class="pl-0 pl-sm-10">Welcome {{ request.user }}</a></li>
+                  {% endif %}
+
+              {% else %}
+              <li><a class="pl-0 pl-sm-10">Welcome guest</a></li>
+              {% endif %}
+            </ul>
+            <ul
+              class="float-right float-sm-none list-a-plr-10 list-a-plr-sm-5 list-a-ptb-15 list-a-ptb-sm-5"
+            >
+            <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+            <li><a href="{% url 'aboutus' %}">About Us</a></li>
+              {% if user.is_authenticated %}
+              <li><a href="{% url 'dashboard' %}">Dashboard </a></li>
+              <li><a href="{% url 'logout' %}">Log out </a></li>
+              {% else %}
+              <li><a href="{% url 'signup' %}">Sign up</a></li>
+              <li><a href="{% url 'login' %}">Login </a></li>
+              {% endif %}
+            </ul>
+          </div>
+          <!-- top-menu -->
+        </div>
+        <!-- container -->
+      </div>
+      <!-- bg-191 -->
+
+      <div class="container">
+        <a class="logo" href="{% url 'Mainhome' %}"
+          ><h3 class="text-danger">EmpireKnowledge</h3></a>
+
+        <a class="right-area src-btn" href="#">
+          <i class="active src-icn ion-search"></i>
+          <i class="close-icn ion-close"></i>
+        </a>
+        <div class="src-form">
+          <form method="get" action=" ">
+            <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Search here" />
+            <button type="submit"><i class="ion-search"></i></button>
+          </form>
+        </div>
+        <!-- src-form -->
+
+        <a class="menu-nav-icon" data-menu="#main-menu" href="#"
+          ><i class="ion-navicon"></i
+        ></a>
+
+        <ul class="main-menu" id="main-menu">
+          <li><a href="{% url 'mediahome' %}">MEDIA BLOG</a></li>
+          <li><a href="{% url 'eventhome' %}">EVENTS</a></li>
+          <li><a href="{% url 'scopehome' %}">SCOPE</a></li>
+          <li><a href="{% url 'JournalHome' %}">JOURNAL</a></li>
+          <li><a href="{% url 'ebbok' %}">E-BOOKS</a></li>
+          <li><a href="{% url 'communityhome' %}">COMMUNITY</a></li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <!-- container -->
+    </header>
+
+    <div class="col-md-12">
+      {% block content %} {% endblock %}
+    </div>
+    <!-- container -->
+
+    <footer class="bg-191 color-ccc">
+        <h3 class="text-center">copyright&copy;All Rights Reserved By EmpireKnowledge.com</h3>
+    </footer>
+
+    <!-- SCIPTS -->
+
+    <script src="{% static 'plugin-frameworks/jquery-3.2.1.min.js' %}"></script>
+
+    <script src="{% static 'plugin-frameworks/tether.min.js' %}"></script>
+
+    <script src="{% static 'plugin-frameworks/bootstrap.js' %}"></script>
+
+    <script src="{% static 'common/scripts.js' %}"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'validate.js' %}"></script>
+    <script type="text/javascript">
+      $(document).ready(function (event) {
+          {% block js %}
+
+          {% endblock %}
+        $(".reply-btn").click(function () {
+
+          $(this).parent().parent().next(".replied-comments").fadeToggle();
+        });
+        $(".event-reply-btn").click(function () {
+
+          $(this).parent().parent().next(".event-replied-comments").fadeToggle();
+        });
+          $(".scope-reply-btn").click(function () {
+
+          $(this).parent().parent().next(".scope-replied-comments").fadeToggle();
+        });
+          $(".journal-reply-btn").click(function () {
+
+          $(this).parent().parent().next(".journal-replied-comments").fadeToggle();
+        });
+
+
+        $(document).on("submit", ".comment-form", function (event) {
+
+          event.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: $(this).attr("action"),
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (response) {
+              $(".main-comment-section").html(response["form"]);
+              $("textarea").val("");
+              $(".reply-btn").click(function () {
+                $(this)
+                  .parent()
+                  .parent()
+                  .next(".replied-comments")
+                  .fadeToggle();
+              });
+              $("textarea").val("");
+            },
+            error: function (rs, e) {
+              console.log(rs.responseText);
+            },
+          });
+        });
+
+
+        ///event comment
+          $(document).on("submit", ".event-comment-form", function (event) {
+          console.log("event comment");
+          event.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: $(this).attr("action"),
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (response) {
+              $(".event-comment-section").html(response["form"]);
+              $("textarea").val("");
+              $(".event-reply-btn").click(function () {
+                $(this)
+                  .parent()
+                  .parent()
+                  .next(".event-replied-comments")
+                  .fadeToggle();
+              });
+              $("textarea").val("");
+            },
+            error: function (rs, e) {
+              console.log(rs.responseText);
+            },
+          });
+        });
+       ///
+            $(document).on('click','#download',function() {
+
+           var pk=$(this).attr('value');
+           $.ajax({
+              type:'POST',
+              url:'{% url 'download' %}',
+              data:{'journal_id':pk,'csrfmiddlewaretoken':'{{ csrf_token }}'},
+              dataType:'json',
+              success : function (response) {
+                  $("#download-section").html(response['form']);
+              },
+              error: function (rs,e) {
+                  console.log(rs.responseText);
+              }
+           });
+        });
+            ///journal comment
+          $(document).on("submit", ".journal-comment-form", function (event) {
+          console.log("journal comment");
+          event.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: $(this).attr("action"),
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (response) {
+              $(".journal-comment-section").html(response["form"]);
+              $("textarea").val("");
+              $(".journal-reply-btn").click(function () {
+                $(this)
+                  .parent()
+                  .parent()
+                  .next(".journal-replied-comments")
+                  .fadeToggle();
+              });
+              $("textarea").val("");
+            },
+            error: function (rs, e) {
+              console.log(rs.responseText);
+            },
+          });
+        });
+          /// journal reply
+
+          $(document).on("submit", ".journal-reply-form", function (event) {
+          console.log("ok");
+          event.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: $(this).attr("action"),
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (response) {
+              $(".journal-comment-section").html(response["form"]);
+              $("textarea").val("");
+              $(".journal-reply-btn").click(function () {
+                $(this)
+                  .parent()
+                  .parent()
+                  .next(".journal-replied-comments")
+                  .fadeToggle();
+              });
+              $("textarea").val("");
+            },
+            error: function (rs, e) {
+              console.log(rs.responseText);
+            },
+          });
+        });
+      //
+
+        $(document).on('click','#interested',function(event) {
+            event.preventDefault();
+           var pk=$(this).attr('value');
+           $.ajax({
+              type:'POST',
+              url:'{% url 'interested_event' %}',
+              data:{'event_id':pk,'csrfmiddlewaretoken':'{{ csrf_token }}'},
+              dataType:'json',
+              success : function (response) {
+                  $("#interested-section").html(response['form']);
+                  console.log("done");
+              },
+              error: function (rs,e) {
+                  console.log(rs.responseText);
+              }
+           });
+        });
+         $(document).on('click','#scopelikeid',function(event) {
+            event.preventDefault();
+           var pk=$(this).attr('value');
+           $.ajax({
+              type:'POST',
+              url:'{% url 'scope_like' %}',
+              data:{'scope_id':pk,'csrfmiddlewaretoken':'{{ csrf_token }}'},
+              dataType:'json',
+              success : function (response) {
+                  $("#scope-section").html(response['form']);
+                  console.log("done");
+              },
+              error: function (rs,e) {
+                  console.log(rs.responseText);
+              }
+           });
+        });
+
+
+         $(document).on('click','#scopeloveid',function(event) {
+            event.preventDefault();
+           var pk=$(this).attr('value');
+           $.ajax({
+              type:'POST',
+              url:'{% url 'scope_love' %}',
+              data:{'scope_id':pk,'csrfmiddlewaretoken':'{{ csrf_token }}'},
+              dataType:'json',
+              success : function (response) {
+                  $("#scope-section").html(response['form']);
+                  console.log("done");
+              },
+              error: function (rs,e) {
+                  console.log(rs.responseText);
+              }
+           });
+        });
+
+
+        $(document).on("submit", ".reply-form", function (event) {
+          console.log("ok");
+          event.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: $(this).attr("action"),
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (response) {
+              $(".main-comment-section").html(response["form"]);
+              $("textarea").val("");
+              $(".reply-btn").click(function () {
+                $(this)
+                  .parent()
+                  .parent()
+                  .next(".replied-comments")
+                  .fadeToggle();
+              });
+              $("textarea").val("");
+            },
+            error: function (rs, e) {
+              console.log(rs.responseText);
+            },
+          });
+        });
+        //// event reply
+          $(document).on("submit", ".event-reply-form", function (event) {
+          console.log("ok");
+          event.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: $(this).attr("action"),
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (response) {
+              $(".event-comment-section").html(response["form"]);
+              $("textarea").val("");
+              $(".event-reply-btn").click(function () {
+                $(this)
+                  .parent()
+                  .parent()
+                  .next(".event-replied-comments")
+                  .fadeToggle();
+              });
+              $("textarea").val("");
+            },
+            error: function (rs, e) {
+              console.log(rs.responseText);
+            },
+          });
+        });
+////scope comment
+           $(document).on("submit", ".scope-comment-form", function (event) {
+          console.log("scope comment");
+          event.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: $(this).attr("action"),
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (response) {
+              $(".scope-comment-section").html(response["form"]);
+              $("textarea").val("");
+              $(".scope-reply-btn").click(function () {
+                $(this)
+                  .parent()
+                  .parent()
+                  .next(".scope-replied-comments")
+                  .fadeToggle();
+              });
+              $("textarea").val("");
+            },
+            error: function (rs, e) {
+              console.log(rs.responseText);
+            },
+          });
+        });
+
+          $(document).on("submit", ".scope-reply-form", function (event) {
+          console.log("ok");
+          event.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: $(this).attr("action"),
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (response) {
+              $(".scope-comment-section").html(response["form"]);
+              $("textarea").val("");
+              $(".scope-reply-btn").click(function () {
+                $(this)
+                  .parent()
+                  .parent()
+                  .next(".scope-replied-comments")
+                  .fadeToggle();
+              });
+              $("textarea").val("");
+            },
+            error: function (rs, e) {
+              console.log(rs.responseText);
+            },
+          });
+        });
+
+        ////
+        $(document).on("click", ".react-icon", function (event) {
+          event.preventDefault();
+          const pk = event.target.parentElement.value;
+          const reactionType = event.target.parentElement.getAttribute(
+            "reactionType"
+          );
+
+          $.ajax({
+            method: "POST",
+            url: '{% url "react" %}',
+            headers: {
+              "Content-Type": "applicati " +
+                  "on/json",
+              "X-CSRFToken": "{{ csrf_token }}",
+            },
+            data: JSON.stringify({
+              post_id: pk,
+              csrfmiddlewaretoken: "{{ csrf_token }}",
+              reactionType: reactionType,
+            }),
+            dataType: "json",
+            success: function (data) {
+              reactions_holder = document.getElementById(
+                reactionType + "-reactions-count"
+              );
+              // removing the ( ) from the text content of the count
+
+              if (data["action"]["increase"] !== null) {
+                let countToIncrease = document.getElementById(
+                  data["action"]["increase"] + "-reactions-count"
+                );
+                countToIncrease.textContent =
+                  "(" +
+                  (Number(countToIncrease.textContent.match(/(\d+)/)[0]) + 1) +
+                  ")";
+              }
+
+              if (data["action"]["decrease"] !== null) {
+                let countToDecrease = document.getElementById(
+                  data["action"]["decrease"] + "-reactions-count"
+                );
+                countToDecrease.textContent =
+                  "(" +
+                  (Number(countToDecrease.textContent.match(/(\d+)/)[0]) - 1) +
+                  ")";
+              }
+            },
+            error: function (rs, e) {
+              console.log("error");
+            },
+          });
+        });
+
+      });
+    </script>
+  </body>
+</html>

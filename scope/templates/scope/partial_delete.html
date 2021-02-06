@@ -1,0 +1,4 @@
+<form  class="btn btn-sm" method="post" action="{% url 'getscope' %}">
+    {% csrf_token %}
+    <button id="scopedelete" name="scope_id" value="{{ m.id }}"><i class="glyphicon glyphicon-trash"></i></button>
+</form>

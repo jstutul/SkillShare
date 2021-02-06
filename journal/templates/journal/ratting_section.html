@@ -1,0 +1,12 @@
+<li>
+                          <form method="post" action="{% url 'addratting' %}">{% csrf_token %}
+                                <input type="hidden" name="jour" id ="getid" value="{{ journal.id }}">
+                              <input type="range" min="1" max="5" value="{{ ratting }}" name="rat" class="slider" id="myRange">
+                              <span class="fa fa-star"> <span id="demo"></span></span>
+                               <button type="submit" id="addrattingbut"  class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Add</button>
+
+                            </form>
+                        </li>
+                        <li class="float-lg-right">
+                             <i class="fas fa-star-half-alt"> Avg rating : {{ journal.avg_ratings }}/{{ journal.no_of_rating }}</i>
+                        </li>

@@ -1,0 +1,58 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+ {% if messages %}
+           {% for message in messages %}
+         <div class="alert alert-success alert-dismissable">
+         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+         {{ message }} <a href="#" class="alert-link"></a>.
+         </div>
+        {% endfor %}
+
+        {% endif %}
+
+                    <div class="app-main__inner">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-header"><h3>Welcome to Profile </h3>
+
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                           <div class="col-md-4 float-left p-2" >
+                                               <img src="{{ userr.photo.url }}" width="300px" height="300px" style="max-width: 250px;">
+                                                {% if is_user == True %}
+                                                    <a href="{% url 'updateorg' %}" class="btn btn-primary col-md-11" style="max-width: 250px;">Update profile</a>
+                                                {% else %}
+                                                    <a href="{% url 'updateregular' %}" class="btn btn-primary col-md-11" style="max-width: 250px;">Update profile</a>
+                                                {% endif %}
+                                           </div>
+                                            <div class="col-md-8 p-2 float-right">
+                                             {% if is_user == True %}
+                                              <p class="text-info font-weight-bold">Organization Name : <span class="text-warning">{{ userr.o_name }}</span></p>
+                                                 <p class="text-info font-weight-bold">Email address :  <span class="text-warning">{{ user.email }}</span></p>
+                                                 <p class="text-info font-weight-bold">Phone :  <span class="text-warning">{{ userr.phone }}</span></p>
+                                                 <p class="text-info font-weight-bold">City :  <span class="text-warning">{{ userr.city }}</span></p>
+                                                 <p class="text-info font-weight-bold">Address :  <span class="text-warning">{{ userr.address }}</span></p>
+                                                 <p class="text-info font-weight-bold">Website :  <span class="text-warning">{{ userr.web }}</span></p>
+                                             <p class="text-info font-weight-bold">Organization purpose : <span class="text-warning">{{ userr.purpose }}</span></p>
+                                                {% else %}
+                                                 <p class="text-info font-weight-bold">Full Name : <span class="text-warning"> {{ user.first_name }} {{ user.last_name }}</span></p>
+                                                 <p class="text-info font-weight-bold">Email address :  <span class="text-warning">{{ user.email }}</span></p>
+                                                 <p class="text-info font-weight-bold">Phone :  <span class="text-warning">{{ userr.phone }}</span></p>
+                                                 <p class="text-info font-weight-bold">City :  <span class="text-warning">{{ userr.city }}</span></p>
+                                                 <p class="text-info font-weight-bold">Facebook :  <span class="text-warning">{{ userr.fb }}</span></p>
+                                             <p class="text-info font-weight-bold">About me : <span class="text-warning">{{ userr.about_you }}</span></p>
+                                                {% endif %}
+
+                                            </div>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block css %}
+.responsiveRapper {
+	overflow:hidden;
+	padding-bottom:56.25%;
+	padding-top:30px;
+	height:0;
+	position:relative;
+}
+ @media screen and (max-width: 360px) {
+        li img{
+        width:15px;
+        height:15px;
+       }
+    }
+
+
+
+.like{
+margin-left:5px;
+}
+li img {
+    width: 15px;
+    height: 20px;
+}
+.responsiveRapper iframe,
+.responsiveRapper object,
+.responsiveRapper embed {
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	position:absolute;
+}
+#comm{
+    border:2px solid slategrey;
+    padding:7pxl
+    margin:10px;
+    font-size:15px;
+    }
+.reacts{
+    width:240px;
+    height: 45px;
+    padding:5px;
+    padding-bottom: 45px;
+    background: #282a2b26;
+    margin-top: -50px;
+    margin-left: -34px;
+    position: absolute;text-align: center;
+    border-radius: 30px;
+    display: none;
+    --animate-duration: 0.5s;
+		}
+.reacts button{
+    width: 40px;
+    height: 40px;
+    border:none;
+    outline: none;
+    border-radius: 50%;
+    background-color: #fff;
+  }
+.reacts button:focus,.reacts button:active{
+    outline:0;
+    outline:none;
+    -moz-outline-style:none;s
+    }
+.reacts img{
+	width: 40px;
+    height: 40px;
+}
+.reacts img:hover{
+    transform:scale(1.5);
+}
+
+.output{
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background-color: #fff;
+}
+.block{
+    display: block;
+}
+p {
+    margin: 0 0 10px;
+    margin-top: 10px;
+}
+
+{% endblock %}
+
+{% block title %}
+View my post
+{% endblock %}
+
+{% block content %}
+<section>
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-12 col-lg-12 ">
+                    <p class="text-primary text-center" style="font-size: 25px;">View My Post</p><hr>
+					<div class="responsiveRapper">
+                        <iframe width="560" height="315"
+                        src="https://www.youtube.com/embed/{{ video_id }}">
+                        </iframe>
+                    </div>
+					<h3 class="mt-30 text-center text-info p-2"><b>{{ post.title }}</b></h3>
+					<div class="list-li-mr-3 list-li-sm-mr-0 mtb-15 pr-4 text-center">
+                        <a><i class="fa fa-eye"></i></a>({{ post.view_counter.count }} )
+                        <img src="{% static 'react/love.gif'%}"  height="25px" width="25px">({{ post.heart_count }})
+                        <img src="{% static 'react/sad.gif'%}"   height="20px" width="20px">({{ post.sad_count }})
+                        <img src="{% static 'react/like.gif'%}"  height="25px" width="25px">({{ post.like_count }})
+                        <img src="{% static 'react/haha.gif'%}"  height="25px" width="25px">({{ post.haha_count }})
+                        <img src="{% static 'react/angry.gif'%}" height="25px" width="25px">({{ post.angry_count }})
+					</div>
+					<div class="quote-primary mtb-20 p-2">
+						<h5 >{{ post.media_description | safe }}</h5>
+					</div><!-- quote-primary -->
+
+				</div><!-- col-md-9 -->
+
+
+			</div><!-- row -->
+
+		</div><!-- container -->
+	</section>
+<script type="text/javascript">
+	$(document).ready(function(){
+    $(".like").click(function(){
+        $(".reacts").fadeToggle('block');
+    });
+    $(".animated").click(function(){
+        $(".reacts").hide();
+    });
+
+});
+</script>
+{% endblock %}

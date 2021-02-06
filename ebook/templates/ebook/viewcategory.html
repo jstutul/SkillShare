@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ category}}
+{% endblock %}
+
+{% block css %}
+#loadMore {
+    padding-bottom: 30px;
+    padding-top: 30px;
+    text-align: center;
+    width: 100%;
+}
+#loadMore a {
+    background: #faa635;
+    border-radius: 3px;
+    color: white;
+    display: inline-block;
+    padding: 10px 30px;
+    transition: all 0.25s ease-out;
+    -webkit-font-smoothing: antialiased;
+}
+#loadMore a:hover {
+    background-color: #042a63;
+}
+.card-body{
+    background-color:#55595c;
+    }
+{% endblock %}
+
+{% block content %}
+
+<div class="album py-5 bg-light" style="width: 90%;margin: 0 auto;">
+        <div class="container">
+          <div class="row" style="padding-left: 2%;padding-right: 2%;">
+           {% if is_books %}
+               {% for b in books %}
+            <div class="col-md-4 box">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="{{ b.cover_pic.url }}" style="height: 300px; width: 100%; display: block;"data-holder-rendered="true">
+                <div class="card-body" style="height: 170px;">
+                  <h4 class="card-text" style="color: #ffffff;font-weight: 600;font-size: 1.1rem;"><a href="{% url 'readbook' b.book_name %}">{{ b.book_name }}</a></h4>
+                  <div class="">
+                    <p style="color: #ffffff;" class="w-100">Category : <b class="text-primary">{{ b.category }} </b></p>
+                     <p style="color: #ffffff;" class="w-100">Author : <b class="text-primary">{{ b.book_author }} </b></p>
+                     <p style="color: #ffffff;" class="w-100">Edition : <b class="text-primary">{{ b.book_edition }} </b>
+                     <span>Book Type : <b class="bg-warning p-2">{{ b.book_type }}</b></span>
+                     </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+                {% endfor %}
+           {% else %}
+               <h2 class="text-primary text-center">Sorry there is no book in this category </h2>
+          {% endif %}
+          {% if is_book_more %}
+              {% for book in next_book%}
+            <div class="col-md-4 box" style="display: none">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="{{book.cover_pic.url }}" alt="Thumbnail [100%x225]" data-holder-rendered="true" style="height: 300px; width: 100%; display: block;">
+                <div class="card-body" style="height: 170px;">
+                  <h4 class="card-text" style="color: #ffffff;font-weight: 600;font-size: 1.1rem;"><a href="{% url 'readbook' book.book_name %}">{{ book.book_name }}</a></h4>
+                  <div class="">
+                    <p style="color: #ffffff;" class="w-100">Category : <b class="text-primary">{{ book.category }} </b></p>
+                     <p style="color: #ffffff;" class="w-100">Author : <b class="text-primary">{{ book.book_author }} </b></p>
+                     <p style="color: #ffffff;" class="w-100">Edition : <b class="text-primary">{{ book.book_edition }} </b>
+                     <span>Book Type : <b class="bg-warning p-2">{{ book.book_type }}</b></span>
+                     </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+            <div id="loadMore" style="">
+              <a href="#">Load More</a>
+            </div>
+          {% endif %}
+          </div>
+        </div>
+      </div>
+<script type="text/javascript" src="{% static 'js/jquery3.1.min.js' %}"></script>
+	<script>
+$( document ).ready(function () {
+  $(".box").slice(0, 2).show();
+    if ($(".box:hidden").length != 0) {
+      $("#loadMore").show();
+    }
+    $("#loadMore").on('click', function (e) {
+      e.preventDefault();
+      $(".box:hidden").slice(0, 3).slideDown();
+      if ($(".box:hidden").length == 0) {
+        $("#loadMore").fadeOut('slow');
+      }
+    });
+  });
+</script>
+{% endblock %}

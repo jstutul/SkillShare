@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Subscription page
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h1 class="display-4">Subscription Pricing</h1>
+      <p class="lead"> If you want to full access of reading online book in our website you must be have a subscription package in our website.Please subscribe and enjoy reading book in our website</p>
+    </div>
+         {% if messages %}
+           {% for message in messages %}
+         <div class="alert alert-danger alert-dismissable">
+         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+         {{ message }} <a href="#" class="alert-link"></a>.
+         </div>
+        {% endfor %}
+
+        {% endif %}
+    <div class="container">
+      <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">30 DAYS</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title p-30">$20</h1>
+          </div>
+            <div class="">
+             <a href="{% url 'ebookcheckout'  pack='1M' %}"  class="btn btn-lg btn-block btn-primary">Pay now</a>
+          </div>
+        </div>
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">3 MONTH</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title p-30">$50</h1>
+          </div>
+          <div class="">
+             <a href="{% url 'ebookcheckout'  pack='3M' %}"  class="btn btn-lg btn-block btn-primary">Pay now</a>
+          </div>
+        </div>
+
+         <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">1 YEAR</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title p-30">$100</h1>
+          </div>
+          <div class="">
+              <a href="{% url 'ebookcheckout'  pack='12M' %}"  class="btn btn-lg btn-block btn-primary">Pay now</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+{% endblock %}

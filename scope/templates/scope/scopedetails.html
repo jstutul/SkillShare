@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load social_share %}
+{% load crispy_forms_tags %}
+{% block css %}
+.responsiveRapper {
+	overflow:hidden;
+	padding-bottom:56.25%;
+	padding-top:30px;
+	height:0;
+	position:relative;
+}
+ @media screen and (max-width: 360px) {
+        li img{
+        width:15px;
+        height:15px;
+       }
+    }
+
+
+
+.like{
+margin-left:5px;
+}
+li img {
+    width: 15px;
+    height: 20px;
+}
+.responsiveRapper iframe,
+.responsiveRapper object,
+.responsiveRapper embed {
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	position:absolute;
+}
+#comm{
+    border:2px solid slategrey;
+    padding:7pxl
+    margin:10px;
+    font-size:15px;
+    }
+.reacts{
+    width:240px;
+    height: 45px;
+    padding:5px;
+    padding-bottom: 45px;
+    background: #282a2b26;
+    margin-top: -50px;
+    margin-left: -34px;
+    position: absolute;text-align: center;
+    border-radius: 30px;
+    display: none;
+    --animate-duration: 0.5s;
+		}
+.reacts button{
+    width: 40px;
+    height: 40px;
+    border:none;
+    outline: none;
+    border-radius: 50%;
+    background-color: #fff;
+  }
+.reacts button:focus,.reacts button:active{
+    outline:0;
+    outline:none;
+    -moz-outline-style:none;s
+    }
+.reacts img{
+	width: 40px;
+    height: 40px;
+}
+.reacts img:hover{
+    transform:scale(1.5);
+}
+
+.output{
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background-color: #fff;
+}
+.block{
+    display: block;
+}
+
+
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+
+
+<section class="ptb-0">
+		<div class="brdr-ash-1 opacty-5"></div>
+		<div class="container">
+			<a class="mt-10" href="{% url 'Mainhome' %}"><i class="mr-5 ion-ios-home"></i>Home<i class="mlr-10 ion-chevron-right"></i></a>
+			<a class="mt-10" href="{% url 'scopehome' %}">Scope<i class="mlr-10 ion-chevron-right"></i></a>
+			<a class="mt-10 color-ash" >Scope Details Here</a>
+		</div><!-- container -->
+</section>
+
+<section>
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-12 col-lg-8">
+					<img src="{{ scope.cover_image.url }}" alt="" style="height: 500px">
+					<h3 class="mt-30"><b>{{ scope.scope_title }}</b></h3>
+					<ul class="list-li-mr-3 list-li-sm-mr-0 mtb-15 pr-4">
+                        {% if scope.user.organizationuser.user_o == scope.user %}
+						<li>by <a href="#"><b>{{ scope.user.organizationuser.title }} </b></a></li>
+						{% else %}
+                        <li>by <a href="#"><b>{{ scope.user }} </b></a></li>
+                        {% endif %}
+                         <li><a><i class="ion-eye"></i></a> {{ scope.scope_viewer.count }}</li>
+                         <li><code>{{ scope.end_date | timeuntil }} ago</code></li>
+					</ul>
+					<div class="quote-primary mtb-20">
+						<h5 >{{ scope.details | safe }}</h5>
+                        {% if scope.url != ""%}
+                        <p><b>Website link :</b> <a href="{{ scope.url }}">Click here</a></p>
+                        {% endif %}
+					</div><!-- quote-primary -->
+					<div class="float-left-right text-center mt-40 mt-sm-20">
+				   <div class="mb-30 list-a-bg-grey list-a-hw-radial-35 list-a-hvr-primary list-li-ml-5 float-left">
+
+                        <ul id="scope-section">
+                            {% include 'scope/reaction_section.html' %}
+                        </ul>
+
+						</div>
+
+						<ul class="mb-30 float-right list-a-bg-grey list-a-hw-radial-35 list-a-hvr-primary list-li-ml-5">
+							<li class="mr-10 ml-0">Share</li>
+							<li>{% post_to_facebook object_or_url  '<i class="fab fa-facebook"></i>' %}</li>
+                            <li>{% post_to_whatsapp object_or_url  '<i class="fab fa-whatsapp"></i>' %}</li>
+                            <li>{% post_to_gplus  object_or_url  '<i class="fab fa-google-plus-g"></i>' %}</li>
+                            <li>{% post_to_twitter "New Scope: {{ scope.scope_title}}. Check it out!" object_or_url  '<i class="fab fa-twitter"></i>' %}</li>
+						</ul>
+					</div><!-- float-left-right -->
+
+					<div class="brdr-ash-1 opacty-5"></div>
+                    <h4 class="p-title mt-20"><b>LEAVE A COMMENT</b></h4>
+
+
+                    <div class="scope-comment-section">
+                    {% include 'scope/comment_section.html' %}
+                    </div>
+
+					<div class="sided-70 mb-50">
+
+					</div><!-- sided-70 -->
+
+
+				</div><!-- col-md-9 -->
+
+				<div class="d-none d-md-block d-lg-none col-md-3"></div>
+				<div class="col-md-6 col-lg-4">
+					<div class="pl-20 pl-md-0">
+
+						<div class="mb-50">
+							<h4 class="p-title"><b>POPULAR SCOPES</b></h4>
+                            {% for p in popular_scope %}
+							<div class="oflow-hidden pos-relative mb-20 dplay-block">
+								<div class="wh-100x abs-tlr"><img src="{{ p.cover_image.url }}" alt=""></div>
+								<div class="ml-120 min-h-100x">
+                                    <h5><b><a href="{% url 'scopeview' p.category p.id %}">{{ p.scope_title }}</a></b></h5>
+                                    {% if p.user.organizationuser.user_o == p.user %}
+									<h6 class="color-lite-black pt-10">by <span class="color-black"><b>{{ p.user.organizationuser.title }},</b></span> {{ p.post_date }}</h6>
+									{% else %}
+                                    <h6 class="color-lite-black pt-10">by <span class="color-black"><b>{{ p.user }},</b></span> {{ p.post_date }}</h6>
+								    {% endif %}
+                                </div>
+							</div><!-- oflow-hidden -->
+
+                            {% endfor %}
+						</div><!-- mtb-50 -->
+
+						<div class="mtb-50 pos-relative">
+							<img src="{% static 'images/banner-1-600x450.jpg' %}" alt="">
+							<div class="abs-tblr bg-layer-7 text-center color-white">
+								<div class="dplay-tbl">
+									<div class="dplay-tbl-cell">
+										<h4><b>For Advertisement</b></h4>
+										<a class="mt-15 color-primary link-brdr-btm-primary" href="#"><b>click here to visit</b></a>
+									</div><!-- dplay-tbl-cell -->
+								</div><!-- dplay-tbl -->
+							</div><!-- abs-tblr -->
+						</div><!-- mtb-50 -->
+
+						<div class="mtb-50 mb-md-0">
+							<h4 class="p-title"><b>NEWSLETTER</b></h4>
+							<p class="mb-20">Subscribe to our newsletter to get notification about new updates,
+								information, discount, etc..</p>
+							<form class="nwsltr-primary-1">
+								<input type="text" placeholder="Your email"/>
+								<button type="submit"><i class="ion-ios-paperplane"></i></button>
+							</form>
+						</div><!-- mtb-50 -->
+
+					</div><!--  pl-20 -->
+				</div><!-- col-md-3 -->
+
+			</div><!-- row -->
+
+		</div><!-- container -->
+	</section>
+<script type="text/javascript">
+	$(document).ready(function(){
+    $(".slike").click(function(){
+        $(".reacts").fadeToggle('block');
+    });
+    $(".animated").click(function(){
+        $(".reacts").hide();
+    });
+
+});
+</script>
+{% endblock %}

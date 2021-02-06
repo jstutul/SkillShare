@@ -1,0 +1,85 @@
+{% load static %}
+<form class="reaction" method="post" action="{% url 'react'  %}">
+  {% csrf_token %}
+  <div class="reacts animate__fadeInUp">
+    <button
+      type="submit"
+      name="post_id"
+      id="like"
+      reactionType="like"
+      value="{{ post.id }}"
+      class="animated zoomIn react-icon"
+    >
+      <img src="{% static 'react/like.gif' %}" />
+    </button>
+    <button
+      type="submit"
+      name="post_id"
+      id="like"
+      reactionType="heart"
+      value="{{ post.id }}"
+      class="animated zoomIn react-icon"
+    >
+      <img src="{% static 'react/love.gif' %}" />
+    </button>
+    <button
+      type="submit"
+      name="post_id"
+      id="like"
+      reactionType="angry"
+      value="{{ post.id }}"
+      class="animated zoomIn react-icon"
+    >
+      <img src="{% static 'react/angry.gif' %}" />
+    </button>
+    <button
+      type="submit"
+      name="post_id"
+      id="like"
+      reactionType="haha"
+      value="{{ post.id }}"
+      class="animated zoomIn react-icon"
+    >
+      <img src="{% static 'react/haha.gif' %}" />
+    </button>
+    <button
+      type="submit"
+      name="post_id"
+      id="like"
+      value="{{ post.id }}"
+      reactionType="sad"
+      class="animated zoomIn react-icon"
+    >
+      <img src="{% static 'react/sad.gif' %}" />
+    </button>
+  </div>
+</form>
+
+<span id="all-reaction-count-holder" class="float-right">
+  <span
+    ><img src="{% static 'react/like.png'%}"><span id="like-reactions-count" class="reaction-count" style="color: blue"
+      >({{post.like_count}})</span
+    ></span
+  >
+  <span
+    ><img src="{% static 'react/love.png'%}">
+    <span id="heart-reactions-count" class="reaction-count" style="color: red"
+      >({{post.heart_count}})</span
+    ></span
+  >
+  <span
+    ><img src="{% static 'react/haha.png'%}"><span id="haha-reactions-count" class="reaction-count" style="color: #ff00e0"
+      >({{post.haha_count}})</span
+    ></span
+  >
+  <span
+   ><img src="{% static 'react/angry.png'%}"> <span id="angry-reactions-count" class="reaction-count" style="color: #000000"
+      >({{post.angry_count}})</span
+    ></span
+  >
+  <span
+    ><img src="{% static 'react/sad.png'%}" height="15px;width:15px;"><span id="sad-reactions-count" class="reaction-count"
+      >({{post.sad_count}})</span
+    ></span
+  >
+</span>

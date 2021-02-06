@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}
+Login page
+{% endblock %}
+
+{% block css %}
+.card{
+    margin:auto;
+    padding:20px;
+    background:black;
+    margin-bottom:30px;
+    }
+
+{% endblock %}
+
+{% block content %}
+
+ <!-- Material form login -->
+<div class="card col-md-5 bg-dark">
+
+  <h2 class="text-light text-md-center text-sm-center text-justify py-4">
+    <strong>Login Form</strong>
+  </h2>
+
+  <!--Card content-->
+  <div class="card-body px-lg-5 pt-0">
+
+    <!-- Form -->
+    <form class="text-center" method="post">
+ {% csrf_token %}
+      <!-- Email -->
+      <div class="md-form">
+        <input type="text" name="username"  class="form-control">
+        <label style="color: white;">E-mail / Username</label>
+      </div>
+
+      <!-- Password -->
+      <div class="md-form">
+        <input type="password" name="password"  class="form-control">
+        <label  style="color: white;">Password</label>
+      </div>
+ <button class="btn btn-primary btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
+      <div class="d-flex justify-content-around">
+        <div>
+          <!-- Forgot password -->
+          <p class="text-light">Do you
+              <a  href="{% url 'password_reset' %}">Forgot password?</a>
+          </p>
+        </div>
+      </div>
+
+      <p class="text-white" >Not a member?
+        <a href="{% url  'signup'%}">Register</a>
+      </p>
+        {% if messages %}
+        {% for m in messages %}
+            <p class="text-center text-danger">{{ m }}</p>
+        {% endfor %}
+
+        {% endif %}
+
+
+    </form>
+
+
+  </div>
+
+</div>
+
+{% endblock %}

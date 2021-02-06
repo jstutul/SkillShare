@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load social_share %}
+{% load crispy_forms_tags %}
+{% block css %}
+
+#comm{
+    border:2px solid slategrey;
+    padding:7pxl
+    margin:10px;
+    font-size:15px;
+    }
+.fa-star{
+    font-size: 20px;
+    }
+#rating,#d{
+    font-size: 17px;
+    font-family: monospace;
+    color: #060601;
+    font-weight: 700;
+}
+#d{
+    margin-left:5px;
+    }
+
+.fa-star-half-alt{
+    font-size:15px;
+    float: none;
+    }
+
+code {
+    padding: 0.2rem 0.4rem;
+    font-size: 90%;
+    color: #bd4147;
+    background-color: #f7f7f9;
+    border-radius: 0.25rem;
+    margin-left: 10px;
+}
+@media only screen and (min-width: 768px) {
+    .journalimg{
+    width:400px;
+    margin-left: 25%;
+    }
+}
+{% endblock %}
+
+{% block title %}
+journal details page
+{% endblock %}
+{% block content %}
+
+
+<section class="ptb-0">
+		<div class="brdr-ash-1 opacty-5"></div>
+		<div class="container">
+			<a class="mt-10" href="{% url 'Mainhome' %}"><i class="mr-5 ion-ios-home"></i>Home<i class="mlr-10 ion-chevron-right"></i></a>
+			<a class="mt-10" href="{% url 'JournalHome' %}">Journal Home<i class="mlr-10 ion-chevron-right"></i></a>
+			<a class="mt-10 color-ash" >Journal Details Here</a>
+		</div><!-- container -->
+</section>
+
+<section>
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-12 col-lg-8">
+					<img src="{{ journal.jornal_cover.url }}" class="journalimg" alt="" style="height: 500px">
+					<h3 class="mt-30"><b>{{ journal.journal_title }}</b></h3>
+					<ul class="list-li-mr-3 list-li-sm-mr-0 mtb-15 pr-4">
+                        {% if journal.post_by.organizationuser.user_o == journal.post_by %}
+						<li>by <a href="#"><b>{{ journal.post_by.organizationuser.title }} </b></a></li>
+						{% else %}
+                        <li>by <a href="#"><b>{{ journal.post_by }} </b></a></li>
+                       {% endif %}
+                         <li><a><i class="ion-eye"></i></a> {{ journal.journal_view.count }}</li>
+                         <li><code>{{ journal.post_date | timesince }} ago</code></li>
+					</ul>
+
+                <div class="quote-primary mtb-20">
+						<h5 >{{ journal.journal_details | safe }}</h5>
+				</div><!-- quote-primary -->
+                    <div class="quote-primary mtb-20">
+                        <p><b>Journal Author :</b>{{ journal.jornal_author }}</p>
+                        <p><b>Journal  Category:</b>{{ journal.journal_category }}</p>
+                        <p><b>Journal Published:</b> {{ journal.publication_year }}</p>
+                        <p><b>Document Type:</b> {{ journal.document_type }}</p>
+                        <p><b>Journal Type :</b> {{ journal.journal_type }}</p>
+                        {% if journal.journal_type == "Paid" %}
+                         <p><b>Journal price :</b> {{ journal.price }} $ (USA)</p>
+                            {% if is_access %}
+                         <p class="text-success font-weight-bold">you have paid for this journal now you can use it</p>
+                            {% elif request.user.is_superuser == True %}
+                             <p class="text-success font-weight-bold">Admin you are allow access any journal</p>
+                            {% elif request.user == journal.post_by %}
+                            <p class="text-success font-weight-bold">Yuo are the owner of this journal</p>
+                            {% endif %}
+                        {% endif %}
+					</div><!-- quote-primary -->
+
+					<div class="float-left-right text-center mt-40 mt-sm-20">
+				        <div class="mb-30 list-a-bg-grey list-a-hw-radial-35 list-a-hvr-primary list-li-ml-5 float-left">
+
+                        <ul id="download-section">
+                          {% include 'journal/journal_download.html' %}
+                        </ul>
+
+
+						</div>
+
+						<ul class="mb-30 float-right list-a-bg-grey list-a-hw-radial-35 list-a-hvr-primary list-li-ml-5">
+							<li class="mr-10 ml-0">Share</li>
+							<li>{% post_to_facebook object_or_url  '<i class="fab fa-facebook"></i>' %}</li>
+                            <li>{% post_to_whatsapp object_or_url  '<i class="fab fa-whatsapp"></i>' %}</li>
+                            <li>{% post_to_gplus  object_or_url  '<i class="fab fa-google-plus-g"></i>' %}</li>
+                            <li>{% post_to_twitter "New Journal: {{  journal.journal_title}}. Check it out!" object_or_url  '<i class="fab fa-twitter"></i>' %}</li>
+						</ul>
+
+					</div><!-- float-left-right -->
+
+                        <ul id="rating-section">
+                        {% include 'journal/ratting_section.html' %}
+
+                        </ul>
+					<div class="brdr-ash-1 opacty-5"></div>
+                    <h4 class="p-title mt-20"><b>LEAVE A COMMENT</b></h4>
+
+
+                    <div class="journal-comment-section">
+                  {% include 'journal/journal_comment_section.html' %}
+                    </div>
+
+					<div class="sided-70 mb-50">
+
+					</div><!-- sided-70 -->
+
+
+				</div><!-- col-md-9 -->
+
+				<div class="d-none d-md-block d-lg-none col-md-3"></div>
+				<div class="col-md-6 col-lg-4">
+					<div class="pl-20 pl-md-0">
+
+						<div class="mb-50">
+							<h4 class="p-title"><b>POPULAR JOURNAL</b></h4>
+                            {% for p in popular_journal %}
+							<div class="oflow-hidden pos-relative mb-20 dplay-block">
+								<div class="wh-100x abs-tlr"><img src="{{ p.jornal_cover.url }}" alt=""></div>
+								<div class="ml-120 min-h-100x">
+                                    <h5><b><a href="{% url 'journaldetails' p.journal_title p.id%}">{{ p.journal_title }}</a></b></h5>
+
+                                        {% if p.post_by.organizationuser.user_o == p.post_by %}
+                                       <h6 class="color-lite-black pt-10">by  <span class="color-black"><b>{{ p.post_by.organizationuser.title }},</b></span> {{ p.post_date }}</h6>
+                                        {% else %}
+                                       <h6 class="color-lite-black pt-10">by <span class="color-black"><b>{{ p.post_by }},</b></span> {{ p.post_date }}</h6>
+                                        {% endif %}
+								</div>
+							</div><!-- oflow-hidden -->
+
+                            {% endfor %}
+						</div><!-- mtb-50 -->
+
+						<div class="mtb-50 pos-relative">
+							<img src="{% static 'images/banner-1-600x450.jpg' %}" alt="">
+							<div class="abs-tblr bg-layer-7 text-center color-white">
+								<div class="dplay-tbl">
+									<div class="dplay-tbl-cell">
+										<h4><b>For Advertisement</b></h4>
+										<a class="mt-15 color-primary link-brdr-btm-primary" href="#"><b>click here to visit</b></a>
+									</div><!-- dplay-tbl-cell -->
+								</div><!-- dplay-tbl -->
+							</div><!-- abs-tblr -->
+						</div><!-- mtb-50 -->
+
+					</div><!--  pl-20 -->
+				</div><!-- col-md-3 -->
+
+			</div><!-- row -->
+
+		</div><!-- container -->
+	</section>
+<script>
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+</script>
+{% endblock %}
+ {% block js %}
+
+
+       $(document).on('click','#pdfdownload',function () {
+       console.log("pdf");
+       var value=parseInt(document.getElementById('dd').innerText,10);
+       console.log(value);
+       value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('dd').innerHTML = value;
+    });
+     $(document).on('click','#download',function () {
+       console.log("pdf");
+       var value=parseInt(document.getElementById('dd').innerText,10);
+       console.log(value);
+       value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('dd').innerHTML = value;
+    });
+
+
+
+
+{% endblock %}

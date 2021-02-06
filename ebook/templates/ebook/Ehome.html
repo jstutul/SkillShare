@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Ebook Home
+{% endblock %}
+
+{% block css %}
+.col-md-3{
+    transition: all .2s ease-in-out;
+    }
+    .col-md-3:hover {
+    -moz-transform:scale(1.1);
+    -webkit-transform:scale(1.1);
+    transform: scale(1.1);
+    }
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+      <div class="nav-scroller py-1 mb-2">
+
+      </div>
+
+      <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+        <div class="col-md-12 px-0">
+          <h2 class="display-4 font-italic text-center">Read anywhere.</h2>
+          <p class="lead my-3 text-primary">With Feedbooks, enjoy your books on any device : smartphones, tablets or dedicated readers..</p>
+        </div>
+      </div>
+    </div>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-12 blog-main">
+          <h3 class="pb-3 mb-4 font-weight-bold border-bottom">
+           All Books Category
+          </h3>
+
+          <div class="blog-post col-md-12">
+              <div class="album py-5 bg-light">
+        <div class="container">
+
+          <div class="row">
+                <div class="col-md-3">
+                  <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{% static 'ebook_category/art.png' %}" alt="Thumbnail [100%x225]" style="height: 200px; width: 100%; display: block;" data-holder-rendered="true">
+                    <div class="card-body">
+                        <h4 class="text-center"><a href="{% url 'category' cat='Art & Music' %}">Art & Music</a></h4>
+                    </div>
+                  </div>
+                </div>
+            <div class="col-md-3">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="{% static 'ebook_category/travel.jpg' %}" alt="Thumbnail [100%x225]" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="card-body">
+                    <h4 class="text-center"><a href="{% url 'category' cat='Travel' %}">Travel</a></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+                  <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{% static 'ebook_category/sports.jpg' %}" alt="Thumbnail [100%x225]" style="height: 200px; width: 100%; display: block;" data-holder-rendered="true">
+                    <div class="card-body">
+                        <h4 class="text-center"><a href="{% url 'category' cat='Sports' %}">Sports</a></h4>
+                    </div>
+                  </div>
+                </div>
+            <div class="col-md-3">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="{% static 'ebook_category/math.jpg' %}" alt="Thumbnail [100%x225]" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="card-body">
+                    <h4 class="text-center"><a href="{% url 'category' cat='Science & Math' %}">Science & Math</a></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+                  <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{% static 'ebook_category/science.jpg' %}" alt="Thumbnail [100%x225]" style="height: 200px; width: 100%; display: block;" data-holder-rendered="true">
+                    <div class="card-body">
+                        <h4 class="text-center"><a href="{% url 'category' cat='Science & Technology' %}">Science & Technology</a></h4>
+                    </div>
+                  </div>
+                </div>
+            <div class="col-md-3">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="{% static 'ebook_category/Biographies.png' %}" alt="Thumbnail [100%x225]" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="card-body">
+                    <h4 class="text-center"><a href="{% url 'category' cat='Biographies' %}">Biographies</a></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+                  <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{% static 'ebook_category/business.jpg' %}" alt="Thumbnail [100%x225]" style="height: 200px; width: 100%; display: block;" data-holder-rendered="true">
+                    <div class="card-body">
+                        <h4 class="text-center"><a href="{% url 'category' cat='Business' %}">Business</a></h4>
+                    </div>
+                  </div>
+                </div>
+            <div class="col-md-3">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="{% static 'ebook_category/comics.jpg' %}" alt="Thumbnail [100%x225]" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="card-body">
+                    <h4 class="text-center"><a href="{% url 'category' cat='Comics' %}">Comics</a></h4>
+                </div>
+              </div>
+            </div>
+             <div class="col-md-3">
+                  <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{% static 'ebook_category/computer.jpg' %}" alt="Thumbnail [100%x225]" style="height: 200px; width: 100%; display: block;" data-holder-rendered="true">
+                    <div class="card-body">
+                        <h4 class="text-center"><a href="{% url 'category' cat='Computer & Tech' %}">Computer & Tech</a></h4>
+                    </div>
+                  </div>
+                </div>
+            <div class="col-md-3">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="{% static 'ebook_category/cooking.jpg' %}" alt="Thumbnail [100%x225]" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="card-body">
+                    <h4 class="text-center"><a href="{% url 'category' cat='Cooking' %}">Cooking</a></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+                  <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{% static 'ebook_category/entertainment.jpg' %}" alt="Thumbnail [100%x225]" style="height: 200px; width: 100%; display: block;" data-holder-rendered="true">
+                    <div class="card-body">
+                        <h4 class="text-center"><a href="{% url 'category' cat='Entertainment' %}">Entertainment</a></h4>
+                    </div>
+                  </div>
+                </div>
+            <div class="col-md-3">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="{% static 'ebook_category/Health.jpg' %}" alt="Thumbnail [100%x225]" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="card-body">
+                    <h4 class="text-center"><a href="{% url 'category' cat='Health & Fitness' %}">Health & Fitness</a></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+                  <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{% static 'ebook_category/hobbies.jpg' %}" alt="Thumbnail [100%x225]" style="height: 200px; width: 100%; display: block;" data-holder-rendered="true">
+                    <div class="card-body">
+                        <h4 class="text-center"><a href="{% url 'category' cat='Hobbies & Craft' %}">Hobbies & Craft</a></h4>
+                    </div>
+                  </div>
+                </div>
+            <div class="col-md-3">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="{% static 'ebook_category/horror.jpg' %}" alt="Thumbnail [100%x225]" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="card-body">
+                  <h4 class="text-center"><a href="{% url 'category' cat='Horror' %}">Horror</a></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+                  <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{% static 'ebook_category/kids.jpg' %}" alt="Thumbnail [100%x225]" style="height: 200px; width: 100%; display: block;" data-holder-rendered="true">
+                    <div class="card-body">
+                      <h4 class="text-center"><a href="{% url 'category' cat='Kids' %}">Kids</a></h4>
+                    </div>
+                  </div>
+                </div>
+            <div class="col-md-3">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="{% static 'ebook_category/Medical.jpg' %}" alt="Thumbnail [100%x225]" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="card-body">
+                    <h4 class="text-center"><a href="{% url 'category' cat='Medical' %}">Medical</a></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+             <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{% static 'ebook_category/Literature.jpg' %}" alt="Thumbnail [100%x225]" style="height: 200px; width: 100%; display: block;" data-holder-rendered="true">
+                    <div class="card-body">
+                        <h4 class="text-center"><a href="{% url 'category' cat='Literature & Fiction' %}">Literature & Fiction</a></h4>
+                    </div>
+                  </div>
+              </div>
+            <div class="col-md-3">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="{% static 'ebook_category/religion.jpg' %}" alt="Thumbnail [100%x225]" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="card-body">
+                    <h4 class="text-center"><a href="{% url 'category' cat='Religion' %}">Religion</a></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+                  <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="{% static 'ebook_category/romance.jpg' %}" alt="Thumbnail [100%x225]" style="height: 200px; width: 100%; display: block;" data-holder-rendered="true">
+                    <div class="card-body">
+                        <h4 class="text-center"><a href="{% url 'category' cat='Romance' %}">Romance</a></h4>
+                    </div>
+                  </div>
+                </div>
+            <div class="col-md-3">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="{% static 'ebook_category/fantasi.jpg' %}" alt="Thumbnail [100%x225]" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="card-body">
+                    <h4 class="text-center"><a href="{% url 'category' cat='Sci-Fi & Fantasy' %}">Sci-Fi & Fantasy</a></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div><!-- /.blog-post -->
+
+      </div><!-- /.row -->
+      </div>
+
+    </main>
+{% endblock %}

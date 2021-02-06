@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+img {
+    width: 100%;
+
+}
+.col-sm-4{
+    transition: all .2s ease-in-out;
+    }
+    .col-sm-4:hover {
+    -moz-transform:scale(1.1);
+    -webkit-transform:scale(1.1);
+    transform: scale(1.1);
+    }
+{% endblock %}
+
+{% block title %}
+Journal home page
+{% endblock %}
+
+{% block content %}
+
+	<section class="ptb-0">
+		<div class="mb-30 brdr-ash-1 opacty-5"></div>
+		<div class="container">
+			<a class="mt-10" href="{% url 'Mainhome' %}"><i class="mr-5 ion-ios-home"></i>Home<i class="mlr-10 ion-chevron-right"></i></a>
+			<a class="mt-10 color-ash" href="{% url 'JournalHome' %}">Journal</a>
+		</div><!-- container -->
+	</section>
+
+	<section>
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-12 col-lg-8">
+
+					<h4 class="p-title"><b>LATEST JOURNALS</b></h4>
+					<div class="row">
+					{% for j in journals %}
+					<div class="col-sm-4">
+							<img src="{{ j.jornal_cover.url }}" class="h-250x" height="250px" alt="">
+							<h4 class="pt-20"><a href="{% url 'journaldetails' j.journal_title j.id%}"><b>{{ j.journal_title }}</b></a></h4>
+							<ul class="list-li-mr-20 pt-10 mb-30">
+                                {% if j.post_by.organizationuser.user_o == j.post_by %}
+								<li class="color-lite-black">by <a href="#" class="color-black"><b>{{ j.post_by.organizationuser.title }}</b></a>
+                                {% else %}
+                                 <li class="color-lite-black">by <a href="#" class="color-black"><b>{{ j.post_by }}</b></a>
+                                {% endif %}
+								<footer>{{ j.post_date }}</footer></li>
+							</ul>
+						</div><!-- col-sm-6 -->
+					{% endfor %}
+					</div><!-- row -->
+		                {% if journals.paginator.num_pages > 1 %}
+                            {% include 'journal/pagination.html' with items=items %}
+
+                        {% endif %}
+				</div><!-- col-md-9 -->
+
+				<div class="d-none d-md-block d-lg-none col-md-3"></div>
+				<div class="col-md-6 col-lg-4">
+					<div class="pl-20 pl-md-0">
+
+						<div class="mb-50">
+							<h4 class="p-title"><b>TRENDING JOURNAL</b></h4>
+
+                            {% for trend in trends %}
+                            <a class="oflow-hidden pos-relative mb-20 dplay-block" href="{% url 'journaldetails' trend.journal_title trend.id%}">
+								<div class="wh-100x abs-tlr"><img src="{{ trend.jornal_cover.url }}" width="60px" height="60px" alt=""></div>
+								<div class="ml-120 min-h-100x">
+									<h5><b>{{ trend.journal_title }}</b></h5>
+                                    {% if trend.post_by.organizationuser.user_o == trend.post_by %}
+									<h6 class="color-lite-black pt-10">by <span class="color-black"><b>{{ trend.post_by.organizationuser.title }},</b></span> {{ trend.post_date }}</h6>
+									{% else %}
+                                    <h6 class="color-lite-black pt-10">by <span class="color-black"><b>{{ trend.post_by }},</b></span> {{ trend.post_date }}</h6>
+								    {% endif %}
+                                </div>
+							</a><!-- oflow-hidden -->
+                            {% endfor %}
+
+
+
+
+
+						<div class="mtb-50 pos-relative">
+							<img src="{% static 'images/banner-1-600x450.jpg' %}" alt="">
+							<div class="abs-tblr bg-layer-7 text-center color-white">
+								<div class="dplay-tbl">
+									<div class="dplay-tbl-cell">
+										<h4><b>Available for mobile & desktop</b></h4>
+										<a class="mt-15 color-primary link-brdr-btm-primary" href="#"><b>Download for free</b></a>
+									</div><!-- dplay-tbl-cell -->
+								</div><!-- dplay-tbl -->
+							</div><!-- abs-tblr -->
+						</div><!-- mtb-50 -->
+
+					</div><!--  pl-20 -->
+				</div><!-- col-md-3 -->
+
+			</div><!-- row -->
+		</div><!-- container -->
+        </div>
+	</section>
+
+
+{% endblock %}
