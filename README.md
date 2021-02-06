@@ -22,11 +22,51 @@ Web Application, Mobile Application (Traditional)
 
 # WE have 6 different application in our website
 
-# Features
-id: A unique product identifier
-name: The title of the product, as displayed on our website
-description: The description of the product
-price: The price of the product
-shop: The shop from which you can buy this product
-brand: The product brand
-labels: The category labels that apply to this product
+# Media Blog
+1.Write blog about social link
+2.Comment Section (using Ajax)
+3.Facebook React System (Ajax)
+4.Trending and Popular post
+5.Share post in Socail Site
+
+# Event 
+
+1.Post for Event
+2.View Post
+3.Interested event (using Ajax)
+4.Comment Section (using Ajax)
+5.Share post in Socail Site
+6.Register Link
+
+# Scope
+
+1.Post for Scope
+2.View Post
+3.Like and Dislike  (using Ajax)
+4.Comment Section (using Ajax)
+5.Share scope in Socail Site
+6.Register Link
+
+
+# Journal
+
+1.2 types of journals(Free or Paid)
+2.Free journal Download without payment
+3.Paid journal Download after succesfull payment
+4.Payment method Paypal,Visa Card
+5.Comment section
+6.Social Share
+
+# E-Book
+
+1.Offering 2 types of books
+2.Free and Premium Books
+3.Free book read Easily
+4.For Reading Premium Books need to subscribe a Package
+5.Offering 3 type of package( 30 days,90 days,1 years)
+6.Disable downloading Books
+
+# Community
+
+1.Post for any kind of problem
+2.Reply using comment and reply
