@@ -23,3 +23,10 @@ Web Application, Mobile Application (Traditional)
 # WE have 6 different application in our website
 
 # Features
+id: A unique product identifier
+name: The title of the product, as displayed on our website
+description: The description of the product
+price: The price of the product
+shop: The shop from which you can buy this product
+brand: The product brand
+labels: The category labels that apply to this product
